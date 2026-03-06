@@ -16,7 +16,7 @@ $item = $_REQUEST["fullname"];
 
 <body>
 
-    <p><?= $item ?></p>v b 
+    <p><?= $item ?></p>
 
 </body>
 
