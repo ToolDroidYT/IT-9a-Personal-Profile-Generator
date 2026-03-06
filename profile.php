@@ -1,6 +1,7 @@
 <?php
 $fullname = $birthday = $course = $email = $gender = $biography = "";
 $hobbies = [];
+$age = null;
 
 function sanitize_input($data)
 {
@@ -24,6 +25,12 @@ if (($_SERVER["REQUEST_METHOD"] ?? 'GET') == "POST") {
     $gender = get_post_meta('gender');
     $hobbies = get_post_meta('hobbies') ?? [];
     $biography = get_post_meta('biography');
+}
+
+if ($birthday) {
+    $birthDate = new DateTime($birthday);
+    $today = new DateTime();
+    $age = $today->diff($birthDate)->y;
 }
 ?>
 
@@ -52,6 +59,7 @@ if (($_SERVER["REQUEST_METHOD"] ?? 'GET') == "POST") {
         <h2>Profile View</h2>
         <p><strong>Full Name:</strong> <?= $fullname; ?></p>
         <p><strong>Birthday:</strong> <?= $birthday; ?></p>
+        <p><strong>Age:</strong> <?= $age ?></p>
         <p><strong>Course:</strong> <?= $course; ?></p>
         <p><strong>Email:</strong> <?= $email; ?></p>
         <p><strong>Gender:</strong> <?= $gender; ?></p>
