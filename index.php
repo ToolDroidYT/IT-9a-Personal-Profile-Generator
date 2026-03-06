@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
@@ -14,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/theme.css">
@@ -21,9 +19,9 @@
 </head>
 
 <body>
-    <div class="card container mt-4 mb-4 p-4">
+    <div class="card container mt-4 mb-4 p-4 w-50">
         <form action="./profile.php" method="POST" target="_blank" enctype="multipart/form-data">
-            <h2>Profile Generator</h2>
+            <h2><i class="bi bi-person-lines-fill me-2"></i>Profile Generator</h2>
 
             <div class="form-group mb-2">
                 <label for="fullNameField">Full Name</label>
@@ -114,7 +112,10 @@
 
             <!--  -->
 
-            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            <div class="d-flex justify-content-end w-100 gap-2">
+                <button type="reset" class="btn btn-danger mt-4">Reset</button>
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            </div>
         </form>
     </div>
 
