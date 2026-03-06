@@ -14,10 +14,4 @@ $item = $_REQUEST["fullname"];
 </head>
 
 
-<body>
-
-    <p><?= $item ?></p>
-
-</body>
-
-</html>
+<body> 
