@@ -22,7 +22,7 @@
     </form> -->
 
     <div class="card">
-        <form action="./profile.php" method="POST">
+        <form action="./profile.php" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="fullNameField">Full Name</label>
                 <input name="email" type="email" class="form-control" id="fullNameField" placeholder="Enter full name">
@@ -62,10 +62,24 @@
                 <input class="form-check-input" type="radio" name="gender" id="genderFieldPNTS">
             </div>
             <!--  -->
-            
-            <label>Gender</label>
-            <div class="form-check">
-                <input class="form-check-input mt-0" type="checkbox" value="">
+
+            <label>Hobbies</label>
+            <div class="form-check d-flex flex-column flex-wrap">
+            <label for=""></label>    
+            <input class="form-check-input" type="checkbox" value="programming">
+
+                <label for=""></label>
+                <input class="form-check-input" type="checkbox" value="basketball">
+
+                <label for=""></label>
+                <input class="form-check-input" type="checkbox" value="singing">
+
+                <label for=""></label>
+                <input class="form-check-input" type="checkbox" value="socialmedia">
+
+                <label for=""></label>
+                <input class="form-check-input" type="checkbox" value="sleep">
+
             </div>
 
             <div class="form-check">
