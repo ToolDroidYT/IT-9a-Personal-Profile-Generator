@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <div class="card container mt-4 mb-4 p-4 w-50">
+    <div class="card container mt-4 mb-4 p-4">
         <form action="./profile.php" method="POST" target="_blank" enctype="multipart/form-data">
             <h2><i class="bi bi-person-lines-fill me-2"></i>Profile Generator</h2>
 
@@ -29,6 +29,7 @@
                     placeholder="Enter full name">
             </div>
             <div class="form-group mb-2">
+                <!-- Ask for birthday instead of age, we can calculate the age based on the birthday -->
                 <label for="ageField">Birthday</label>
                 <input name="birthday" type="date" class="form-control" id="ageField" placeholder="Enter birthday">
             </div>
