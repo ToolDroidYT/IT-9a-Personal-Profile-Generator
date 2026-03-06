@@ -12,11 +12,11 @@ $item = $_REQUEST["fullname"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
 </head>
-    
+
 
 <body>
 
-    <p><?= $item ?></p>
+    <p><?= $item ?></p>v b 
 
 </body>
 
