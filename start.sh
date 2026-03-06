@@ -5,7 +5,7 @@
 # php -v
 
 # To run the PHP server, use the following command in the terminal:
-php -S localhost:8000 -t .
+php -S 0.0.0.0:8000 -t .
 
 # Or run the start.sh script:
 # 1. cd Activities/Laboratory/LabAct4/
