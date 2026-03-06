@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
@@ -40,6 +41,8 @@
             </div>
 
             <!--  -->
+
+            <label>Gender</label>
             <div class="form-check">
                 <label class="form-check-label" for="genderFieldMale">
                     Male
@@ -59,16 +62,10 @@
                 <input class="form-check-input" type="radio" name="gender" id="genderFieldPNTS">
             </div>
             <!--  -->
-
-            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>
-
-                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btncheck2">Checkbox 2</label>
-
-                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                <label class="btn btn-outline-primary" for="btncheck3">Checkbox 3</label>
+            
+            <label>Gender</label>
+            <div class="form-check">
+                <input class="form-check-input mt-0" type="checkbox" value="">
             </div>
 
             <div class="form-check">
@@ -79,7 +76,9 @@
         </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
