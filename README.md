@@ -18,6 +18,12 @@ This project is a simple web application that allows users to generate a persona
 
 - GitHub: [ToolDroidYT](https://github.com/ToolDroidYT)
 
-## Date Created
+## Other
 
-March 06, 2026
+#### Date Created
+
+- March 6, 2026 at 1:53 PM
+
+#### Last Edited
+
+- March 8, 2026 at 12:12 AM
