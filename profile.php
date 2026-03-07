@@ -227,11 +227,11 @@ $reactions = ['like', 'heart', 'care', 'wow'];
 <body>
     <!-- Navbar -->
     <nav class="navbar bg-body shadow-sm border-bottom border-opacity-25 sticky-top">
-        <div class="flex-row flex-nowrap d-flex w-100 align-items-center">
+        <div class="flex-row flex-nowrap d-flex w-100 align-items-center overflow-hidden">
             <!-- 1 -->
             <div class="d-flex align-items-center justify-content-start flex-fill ms-4">
                 <a href="./index.php"
-                    class="me-3 btn-outline-secondary text-decoration-none text-body d-flex flex-row align-items-center justify-content-center"><i
+                    class="me-3 btn-outline-secondary text-decoration-none text-body d-flex flex-row align-items-center justify-content-center d-none d-md-flex"><i
                         class="bi bi-chevron-left fs-5 text-body"></i><small style="margin-top: -2px;">Back</small></a>
                 <a href="#" class="navbar-brand fw-bold">Pisbok</a>
                 <!-- Search -->
@@ -302,8 +302,8 @@ $reactions = ['like', 'heart', 'care', 'wow'];
     <section class="container" id="profile">
         <!-- Banner -->
         <header class="d-flex w-100 justify-content-center position-relative">
-            <img class="h-auto object-fit-cover rounded-3"
-                style="width: 85%; aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>"
+            <img class="h-auto object-fit-cover rounded-3 banner-width"
+                style="aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>"
                 src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>"
                 alt="Banner image">
             <?php if (!$has_banner_image): ?>
@@ -352,100 +352,119 @@ $reactions = ['like', 'heart', 'care', 'wow'];
     </section>
 
     <section class="w-100 d-flex justify-content-center mb-5" id="content">
-        <div class="container row justify-content-center px-5">
-            <div
-                class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4 sticky-bottom z-n1 align-self-start">
-                <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
+        <div class="container row justify-content-center px-0 px-md-5">
+            <div class="col-lg-6 col-md-8 align-self-start mb-3">
+                <div
+                    class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-4">
+                    <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
 
-                <!-- Birthday -->
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
-                        style="width: 2.5rem; height: 2.5rem;">
-                        <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-cake"></i>
+                    <!-- Birthday -->
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
+                            style="width: 2.5rem; height: 2.5rem;">
+                            <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-cake"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block">Birthday</small>
+                            <span class="fw-medium text-break">
+                                <?= ($birthday_formatted ? $birthday_formatted : '<em>None</em>') ?>
+                                <small class="text-muted">(<?= $birthday_in_days ?>)</small>
+                            </span>
+                        </div>
                     </div>
-                    <div>
-                        <small class="text-muted d-block">Birthday</small>
-                        <span class="fw-medium text-break">
-                            <?= ($birthday_formatted ? $birthday_formatted : '<em>None</em>') ?>
-                            <small class="text-muted">(<?= $birthday_in_days ?>)</small>
-                        </span>
-                    </div>
-                </div>
 
-                <!-- Age -->
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
-                        style="width: 2.5rem; height: 2.5rem;">
-                        <i
-                            class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-hourglass-split"></i>
-                    </div>
-                    <div>
-                        <small class="text-muted d-block">Age</small>
-                        <span class="fw-medium text-break"><?= $age_text ?></span>
-                    </div>
-                </div>
-
-                <!-- Gender -->
-                <?php
-                $gender_icon = null;
-                if ($gender) {
-                    switch (strtolower($gender)) {
-                        case 'male':
-                            $gender_icon = 'bi bi-gender-male';
-                            break;
-                        case 'female':
-                            $gender_icon = 'bi bi-gender-female';
-                            break;
-                        default:
-                            $gender_icon = 'bi bi-gender-ambiguous';
-                    }
-                }
-                ?>
-                <?php if (strtolower($gender) !== 'pnts'): ?>
+                    <!-- Age -->
                     <div class="d-flex align-items-center gap-3 mb-3">
                         <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
                             style="width: 2.5rem; height: 2.5rem;">
                             <i
-                                class="fs-5 d-flex justify-content-center align-items-center rounded-circle <?= $gender_icon ?: 'bi bi-gender-ambiguous' ?>"></i>
+                                class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-hourglass-split"></i>
                         </div>
                         <div>
-                            <small class="text-muted d-block">Gender</small>
-                            <span class="fw-medium text-break"><?= $gender ? ucwords($gender) : 'Unknown'; ?></span>
+                            <small class="text-muted d-block">Age</small>
+                            <span class="fw-medium text-break"><?= $age_text ?></span>
                         </div>
                     </div>
-                <?php endif; ?>
 
-                <!-- Email -->
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
-                        style="width: 2.5rem; height: 2.5rem;">
-                        <i
-                            class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-envelope"></i>
+                    <!-- Gender -->
+                    <?php
+                    $gender_icon = null;
+                    if ($gender) {
+                        switch (strtolower($gender)) {
+                            case 'male':
+                                $gender_icon = 'bi bi-gender-male';
+                                break;
+                            case 'female':
+                                $gender_icon = 'bi bi-gender-female';
+                                break;
+                            default:
+                                $gender_icon = 'bi bi-gender-ambiguous';
+                        }
+                    }
+                    ?>
+                    <?php if (strtolower($gender) !== 'pnts'): ?>
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
+                                style="width: 2.5rem; height: 2.5rem;">
+                                <i
+                                    class="fs-5 d-flex justify-content-center align-items-center rounded-circle <?= $gender_icon ?: 'bi bi-gender-ambiguous' ?>"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">Gender</small>
+                                <span class="fw-medium text-break"><?= $gender ? ucwords($gender) : 'Unknown'; ?></span>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Email -->
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
+                            style="width: 2.5rem; height: 2.5rem;">
+                            <i
+                                class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-envelope"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block">Email</small>
+                            <span class="fw-medium text-break"><?= $email ? $email : '<em>None</em>'; ?></span>
+                        </div>
                     </div>
-                    <div>
-                        <small class="text-muted d-block">Email</small>
-                        <span class="fw-medium text-break"><?= $email ? $email : '<em>None</em>'; ?></span>
+
+                    <h3 class="fs-5 fw-bold my-3">Hobbies</h3>
+
+                    <!-- Hobbies -->
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2 flex-shrink-0"
+                            style="width: 2.5rem; height: 2.5rem;">
+                            <i
+                                class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-dice-3"></i>
+                        </div>
+                        <div class="d-flex flex-row flex-wrap gap-2">
+                            <?php for ($i = 0; $i < count($hobbies); $i++): ?>
+                                <span
+                                    class="badge bg-secondary-subtle text-secondary border border-secondary border-opacity-25">
+                                    <i class="<?= $hobby_icons[$hobbies[$i]] ?? 'bi bi-emoji-wink' ?>"></i>
+                                    <?= ucwords($hobbies[$i]) ?>
+                                </span>
+                            <?php endfor; ?>
+                        </div>
                     </div>
                 </div>
 
-                <h3 class="fs-5 fw-bold my-3">Hobbies</h3>
-
-                <!-- Hobbies -->
-                <div class="d-flex align-items-start gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2 flex-shrink-0"
-                        style="width: 2.5rem; height: 2.5rem;">
-                        <i
-                            class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-dice-3"></i>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap gap-2">
-                        <?php for ($i = 0; $i < count($hobbies); $i++): ?>
-                            <span
-                                class="badge bg-secondary-subtle text-secondary border border-secondary border-opacity-25">
-                                <i class="<?= $hobby_icons[$hobbies[$i]] ?? 'bi bi-emoji-wink' ?>"></i>
-                                <?= ucwords($hobbies[$i]) ?>
-                            </span>
+                <!-- Photos -->
+                <div class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-4 mt-3">
+                    <h3 class="fs-5 fw-bold mb-3">Photos</h3>
+                    <div class="d-flex flex-column g-2">
+                        <?php for ($i = 0; $i < 3; $i++): ?>
+                            <div class="d-flex flex-row gap-1 mb-1">
+                                <?php for ($j = 0; $j < 3; $j++): ?>
+                                    <div class="m-0 p-0 ratio ratio-1x1">
+                                        <img src="https://picsum.photos/100?random=<?php echo $i . $j; ?>" alt="Picture" class="rounded object-fit-cover">
+                                    </div>
+                                <?php endfor; ?>
+                            </div>
                         <?php endfor; ?>
                     </div>
+
                 </div>
             </div>
 
@@ -542,7 +561,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                             <!-- Header -->
                             <div class="d-flex flex-row gap-2 mb-3">
                                 <img class="bg-body-tertiary d-flex justify-content-center align-items-center rounded-circle"
-                                    src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/100/100?random=' . $post_idx ?>"
+                                    src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/100/100?random=' . $post_idx; ?>"
                                     style="width: 2.5rem; height: 2.5rem; object-fit: cover;" alt="Profile picture">
                                 <div class="d-flex flex-column gap-0">
                                     <span class="fw-medium d-block m-0 p-0">
