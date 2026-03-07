@@ -302,7 +302,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
     <section class="container position-relative" id="profile">
         <!-- Backdrop banner -->
         <img class="h-auto object-fit-cover rounded-3 position-absolute top-0 start-50 translate-middle-x opacity-25"
-            style="filter: blur(32px) grayscale(50%); width: 110%; aspect-ratio: 2.5/1.2; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>"
+            style="pointer-events: none; filter: blur(32px) grayscale(50%); width: 110%; aspect-ratio: 2.5/1.2; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>"
             src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>"
             alt="Banner image">
 
