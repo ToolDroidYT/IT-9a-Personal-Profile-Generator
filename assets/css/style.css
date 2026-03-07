@@ -9,11 +9,13 @@ body {
         'ROND' 0;
 }
 
-/* 
-* {
-    outline: 1px solid rgb(255, 0, 0, 0.1);
+html, body {
+    overflow-x: hidden;
 }
- */
+
+/* * {
+    outline: 1px solid rgb(255, 0, 0, 0.1);
+} */
 
 .banner-width {
     width: 100%;
