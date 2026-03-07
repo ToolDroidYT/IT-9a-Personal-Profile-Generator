@@ -208,7 +208,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pisbok - <?= $fullname ?? 'Profile' ?></title>
+    <title>Pisbok - <?= $fullname ?: 'Profile' ?></title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -373,8 +373,10 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                         <div>
                             <small class="text-muted d-block">Birthday</small>
                             <span class="fw-medium text-break">
-                                <?= ($birthday_formatted ? $birthday_formatted : '<em>None</em>') ?>
-                                <small class="text-muted">(<?= $birthday_in_days ?>)</small>
+                                <?= ($birthday_formatted ?: '<em>None</em>') ?>
+                                <?php if ($birthday_in_days): ?>
+                                    <small class="text-muted">(<?= $birthday_in_days ?>)</small>
+                                <?php endif; ?>
                             </span>
                         </div>
                     </div>
@@ -431,7 +433,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                         </div>
                         <div>
                             <small class="text-muted d-block">Email</small>
-                            <span class="fw-medium text-break"><?= $email ? $email : '<em>None</em>'; ?></span>
+                            <span class="fw-medium text-break"><?= $email ?: '<em>None</em>'; ?></span>
                         </div>
                     </div>
 
@@ -452,6 +454,9 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                                     <?= ucwords($hobbies[$i]) ?>
                                 </span>
                             <?php endfor; ?>
+                            <?php if (count($hobbies) == 0): ?>
+                                <span class="text-muted"><em>No hobbies provided</em></span>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
