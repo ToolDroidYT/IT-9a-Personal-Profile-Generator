@@ -1,1 +1,4 @@
+# Prevent the temp folder from being added to git.
+temp/
+
 *.css.map
