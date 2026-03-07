@@ -16,6 +16,10 @@ $profile_picture
 $hobbies = [];
 $age = null;
 
+$has_profile_image
+    = $has_banner_image
+    = false;
+
 function sanitize_input($data)
 {
     return htmlspecialchars(stripslashes(trim($data)));
@@ -97,6 +101,13 @@ function verify_and_save_uploaded_file($file, $upload_dir)
 $temp_dir = './assets/temp/images/';
 $profile_picture_file = verify_and_save_uploaded_file($profile_picture, $temp_dir);
 $banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir);
+
+if ($profile_picture_file) {
+    $has_profile_image = true;
+}
+if ($banner_picture_file) {
+    $has_banner_image = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -134,68 +145,108 @@ $banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir)
 </head>
 
 <body>
-    <header>
-        <!-- Navbar -->
-        <nav class="navbar bg-body-primary shadow-sm border-bottom border-opacity-25">
-            <div class="flex-row flex-nowrap d-flex w-100 align-items-center">
-                <!-- 1 -->
-                <div class="d-flex align-items-center justify-content-center flex-fill ms-4">
-                    <a href="#" class="navbar-brand fw-bold">Pisbok</a>
-                    <!-- Search -->
-                    <form class="form-inline position-relative">
-                        <input class="form-control rounded-pill d-lg-block d-none bg-body-tertiary border-0" type="search" placeholder="      Search" aria-label="Search">
-                        <i class="bi bi-search position-absolute  d-lg-block d-none" style="left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 14px;"></i>
-                        <i class="bi bi-search d-lg-none d-block bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" style="width: 2.5rem; height: 2.5rem; font-size: 14px;"></i>
-                    </form>
-                </div>
+    <!-- Navbar -->
+    <nav class="navbar bg-body shadow-sm border-bottom border-opacity-25 sticky-top">
+        <div class="flex-row flex-nowrap d-flex w-100 align-items-center">
+            <!-- 1 -->
+            <div class="d-flex align-items-center justify-content-center flex-fill ms-4">
+                <a href="#" class="navbar-brand fw-bold">Pisbok</a>
+                <!-- Search -->
+                <form class="form-inline position-relative">
+                    <input class="form-control rounded-pill d-lg-block d-none bg-body-tertiary border-0" type="search" placeholder="      Search" aria-label="Search">
+                    <i class="bi bi-search position-absolute  d-lg-block d-none" style="left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 14px;"></i>
+                    <i class="bi bi-search d-lg-none d-block bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" style="width: 2.5rem; height: 2.5rem; font-size: 14px;"></i>
+                </form>
+            </div>
 
-                <!-- 2 -->
-                <div class="d-flex align-items-center justify-content-center flex-fill d-none d-sm-block">
-                    <nav class="">
-                        <ul class="navbar-nav flex-row gap-5 align-items-center justify-content-center ">
-                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
-                                <i class="bi bi-house-door"></i>
-                            </li>
-                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
-                                <i class="bi bi-collection-play"></i>
-                            </li>
-                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
-                                <i class="bi bi-shop-window"></i>
-                            </li>
-                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
-                                <i class="bi bi-people"></i>
-                            </li>
-                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
-                                <i class="bi bi-controller"></i>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+            <!-- 2 -->
+            <div class="d-flex align-items-center justify-content-center flex-fill d-none d-sm-block">
+                <nav class="">
+                    <ul class="navbar-nav flex-row gap-5 align-items-center justify-content-center ">
+                        <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                            <i class="bi bi-house-door"></i>
+                        </li>
+                        <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                            <i class="bi bi-collection-play"></i>
+                        </li>
+                        <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                            <i class="bi bi-shop-window"></i>
+                        </li>
+                        <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                            <i class="bi bi-people"></i>
+                        </li>
+                        <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                            <i class="bi bi-controller"></i>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
-                <!-- 3 -->
-                <div class="flex-column align-items-end flex-fill justify-content-end">
-                    <nav>
-                        <ul class="navbar-nav flex-row gap-2 align-items-end justify-content-end me-4">
-                            <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-grid-3x3-gap-fill"></i>
-                            </li>
-                            <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-chat-dots-fill"></i>
-                            </li>
-                            <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
-                                <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-bell"></i>
-                            </li>
-                            <li class="nav-item ratio ratio-1x1 position-relative d-flex" style="width: 2.5rem; height: 2.5rem;">
-                                <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" src="<?= $profile_picture_file ?>">
-                                <!-- The arrow down icon thingy -->
-                                <i class="bi bi-chevron-down rounded-circle d-flex justify-content-center align-items-center position-absolute align-self-end bg-body-secondary text-light" style="width: 0.8rem; height: 0.8rem; bottom: 0; right: 0; font-size: 8px; justify-self: end;"></i>
-                            </li>
-                        </ul>
-                    </nav>
+            <!-- 3 -->
+            <div class="flex-column align-items-end flex-fill justify-content-end">
+                <nav>
+                    <ul class="navbar-nav flex-row gap-2 align-items-end justify-content-end me-4">
+                        <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
+                            <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-grid-3x3-gap-fill"></i>
+                        </li>
+                        <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
+                            <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-chat-dots-fill"></i>
+                        </li>
+                        <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
+                            <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-bell-fill"></i>
+                        </li>
+                        <li class="nav-item ratio ratio-1x1 position-relative d-flex" style="width: 2.5rem; height: 2.5rem;">
+                            <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>" alt="Profile picture">
+                            <!-- The arrow down icon thingy -->
+                            <i class="bi bi-chevron-down rounded-circle d-flex justify-content-center align-items-center position-absolute align-self-end bg-body-secondary text-light" style="width: 0.8rem; height: 0.8rem; bottom: 0; right: 0; font-size: 8px; justify-self: end;"></i>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Banner -->
+        <header class="d-flex w-100 justify-content-center position-relative">
+            <img class="h-auto object-fit-cover rounded-3" style="width: 85%; aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>" src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>" alt="Banner image">
+            <?php if (!$has_banner_image): ?>
+                <div class="position-absolute top-0 d-flex justify-content-start align-items-end w-100 h-100 rounded-3 d-none d-md-flex" style="left: 9%">
+                    <p class="bg-info-subtle text-info py-1 px-2 rounded-2 opacity-25">No banner provided</p>
+                </div>
+            <?php endif; ?>
+        </header>
+
+        <!-- Profile Info -->
+        <div class="d-flex flex-column align-items-center text-center mt-3">
+            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle" style="width: 168px; height: 168px; margin-top: -100px; border: 4px solid var(--bs-body); z-index: 1;">
+                <img src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>" alt="Profile picture" class="img w-100 rounded-circle h-100">
+            </div>
+            <h1 class="mt-3 mb-0 fw-bold"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?></h1>
+            <p class="text-muted mb-0"><?= $course ? $course : '<em>Course not specified</em>'; ?></p>
+
+            <?php if ($biography): ?>
+                <div class="container d-flex flex-wrap justify-content-center mt-2">
+                    <p class="text-muted py-2 px-3 bg-body-tertiary bg-opacity-75 rounded-3 mt-2 overflow-auto" style="max-height: 100px; max-width: 600px; scrollbar-width: thin;">
+                        <?= $biography ? $biography : '<em>No biography provided</em>'; ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Biography -->
+        <!-- <div class="container mt-4 pt-4 border-top">
+            <div class="d-flex align-items-start gap-3">
+                <div class="bg-success-subtle text-success rounded p-2">
+                    <i class="bi bi-card-text fs-5"></i>
+                </div>
+                <div>
+                    <h3 class="fw-bold">Biography</h3>
+                    <p class="text-muted"><?= $biography ? $biography : '<em>No biography provided</em>'; ?></p>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div> -->
+    </div>
 
 
     <!--  <div class="container mt-5 mb-5">
