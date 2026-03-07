@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+
+<!-- 
+    Name: Jhon Rhey B. Ortillano
+    Course Code: 4561
+    Course Number: IT 9a/L
+
+    Description: 4th Lab Activity - Personal Profile Generator
+
+    Date Created: March 06, 2026
+    GitHub: https://github.com/ToolDroidYT
+-->
+
 <html lang="en" data-bs-theme="dark">
 
 <head>
@@ -19,105 +31,122 @@
 </head>
 
 <body>
-    <div class="card container mt-4 mb-4 p-4">
-        <form action="./profile.php" method="POST" target="_blank" enctype="multipart/form-data">
-            <h2><i class="bi bi-person-lines-fill me-2"></i>Profile Generator</h2>
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                        <h2 class="mb-0 fs-3 fw-bold"><i class="bi bi-person-lines-fill me-2"></i>Profile Generator</h2>
+                    </div>
+                    <div class="card-body p-4 p-md-5">
+                        <form action="./profile.php" method="POST" target="_blank" enctype="multipart/form-data">
 
-            <div class="form-group mb-2">
-                <label for="fullNameField">Full Name</label>
-                <input name="fullname" type="text" class="form-control" id="fullNameField"
-                    placeholder="Enter full name">
-            </div>
-            <div class="form-group mb-2">
-                <!-- Ask for birthday instead of age, we can calculate the age based on the birthday -->
-                <label for="ageField">Birthday</label>
-                <input name="birthday" type="date" class="form-control" id="ageField" placeholder="Enter birthday">
-            </div>
-            <div class="form-group mb-2">
-                <label for="courseField">Course</label>
-                <input name="course" type="text" class="form-control" id="courseField" placeholder="Enter course">
-            </div>
-            <div class="form-group mb-2">
-                <label for="emailField">Email address</label>
-                <input name="email" type="email" class="form-control" id="emailField" placeholder="Enter email">
-            </div>
+                            <h5 class="mb-3 text-secondary border-bottom pb-2">Personal Information</h5>
 
-            <!--  -->
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-floating text-body">
+                                        <input name="fullname" type="text" class="form-control" id="fullNameField" placeholder="Enter full name" required>
+                                        <label for="fullNameField">Full Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating text-body">
+                                        <input name="birthday" type="date" class="form-control" id="ageField" placeholder="Enter birthday" required>
+                                        <label for="ageField">Birthday</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating text-body">
+                                        <input name="course" type="text" class="form-control" id="courseField" placeholder="Enter course" required>
+                                        <label for="courseField">Course</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating text-body">
+                                        <input name="email" type="email" class="form-control" id="emailField" placeholder="Enter email" required>
+                                        <label for="emailField">Email address</label>
+                                    </div>
+                                </div>
+                            </div>
 
-            <label class="mt-2">Gender</label>
-            <div class="form-check">
-                <label class="form-check-label" for="genderFieldMale">
-                    Male
-                </label>
-                <input class="form-check-input" type="radio" name="gender" id="genderFieldMale" value="male">
-            </div>
-            <div class="form-check">
-                <label class="form-check-label" for="genderFieldFemale">
-                    Female
-                </label>
-                <input class="form-check-input" type="radio" name="gender" id="genderFieldFemale" value="female">
-            </div>
-            <div class="form-check">
-                <label class="form-check-label" for="genderFieldPNTS">
-                    Prefer not to say
-                </label>
-                <input class="form-check-input" type="radio" name="gender" id="genderFieldPNTS" value="pnts">
-            </div>
-            <!--  -->
+                            <h5 class="mt-4 mb-3 text-secondary border-bottom pb-2">Additional Details</h5>
 
-            <label class="mt-2">Hobbies</label>
-            <div class="form-check">
-                <input id="programmingHobby" class="form-check-input" type="checkbox" name="hobbies[]"
-                    value="programming">
-                <label for="programmingHobby" class="form-check-label">Programming</label>
-            </div>
-            <div class="form-check">
-                <input id="musicHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="music">
-                <label for="musicHobby" class="form-check-label">Listening to music</label>
-            </div>
-            <div class="form-check">
-                <input id="basketballHobby" class="form-check-input" type="checkbox" name="hobbies[]"
-                    value="basketball">
-                <label for="basketballHobby" class="form-check-label">Basketball</label>
-            </div>
-            <div class="form-check">
-                <input id="singingHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="singing">
-                <label for="singingHobby" class="form-check-label">Singing</label>
-            </div>
-            <div class="form-check">
-                <input id="dancingHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="dancing">
-                <label for="dancingHobby" class="form-check-label">Dancing</label>
-            </div>
-            <div class="form-check">
-                <input id="socialmediaHobby" class="form-check-input" type="checkbox" name="hobbies[]"
-                    value="socialmedia">
-                <label for="socialmediaHobby" class="form-check-label">Social media</label>
-            </div>
-            <div class="form-check">
-                <input id="sleepHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="sleeping">
-                <label for="sleepHobby" class="form-check-label">Sleeping</label>
-            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Gender</label>
+                                    <div class="p-3 border rounded text-body bg-body-tertiary">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="gender" id="genderFieldMale" value="male" required>
+                                            <label class="form-check-label" for="genderFieldMale">Male</label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="gender" id="genderFieldFemale" value="female">
+                                            <label class="form-check-label" for="genderFieldFemale">Female</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="genderFieldPNTS" value="pnts">
+                                            <label class="form-check-label" for="genderFieldPNTS">Prefer not to say</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-            <!--  -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Hobbies</label>
+                                    <div class="p-3 border rounded text-body bg-body-tertiary d-flex flex-wrap gap-2">
+                                        <div class="form-check">
+                                            <input id="programmingHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="programming">
+                                            <label for="programmingHobby" class="form-check-label px-1">Programming</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="musicHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="music">
+                                            <label for="musicHobby" class="form-check-label px-1">Listening to music</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="basketballHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="basketball">
+                                            <label for="basketballHobby" class="form-check-label px-1">Basketball</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="singingHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="singing">
+                                            <label for="singingHobby" class="form-check-label px-1">Singing</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="dancingHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="dancing">
+                                            <label for="dancingHobby" class="form-check-label px-1">Dancing</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="socialmediaHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="socialmedia">
+                                            <label for="socialmediaHobby" class="form-check-label px-1">Social media</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="sleepHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="sleeping">
+                                            <label for="sleepHobby" class="form-check-label px-1">Sleeping</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <label class="mt-2">Biography</label>
-            <div class="form-floating">
-                <textarea class="form-control" style="height: 100px;" placeholder="Write a short biography"
-                    id="biographyField" name="biography"></textarea>
+                            <div class="mb-3">
+                                <label for="biographyField" class="form-label fw-semibold">Biography</label>
+                                <textarea class="form-control" style="height: 120px;" placeholder="Write a short biography about yourself..." id="biographyField" name="biography"></textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="formPFP" class="form-label fw-semibold">Profile Picture</label>
+                                <input class="form-control" type="file" accept="image/*" id="formPFP" name="pfp">
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-end w-100 gap-3">
+                                <button type="reset" class="btn btn-outline-danger px-4 py-2 fw-medium"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
+                                <button type="submit" class="btn btn-primary px-4 py-2 fw-medium shadow-sm"><i class="bi bi-check2-circle me-1"></i>Generate Profile</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="mt-2">
-                <label for="formPFP" class="form-label">Select a profile picture</label>
-                <input class="form-control" type="file" id="formPFP">
-            </div>
-
-            <!--  -->
-
-            <div class="d-flex justify-content-end w-100 gap-2">
-                <button type="reset" class="btn btn-danger mt-4">Reset</button>
-                <button type="submit" class="btn btn-primary mt-4">Submit</button>
-            </div>
-        </form>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
