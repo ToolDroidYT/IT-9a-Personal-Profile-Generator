@@ -70,7 +70,9 @@ function verify_and_save_uploaded_file($file, $upload_dir)
 
     if ($file && $file['error'] === UPLOAD_ERR_OK) {
         $filename = basename($file['name']);
-        $target_file = $upload_dir . $filename;
+        $image_file_md5_hash = hash_file('md5', $file['tmp_name']);
+        $file_extension = pathinfo($filename, PATHINFO_EXTENSION);
+        $target_file = $upload_dir . $image_file_md5_hash . '.' . $file_extension;
 
         // Check if file is a valid image
         $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
@@ -151,7 +153,7 @@ $banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir)
                 <div class="flex-fill d-flex align-items-center justify-content-center">
                     <nav class="w-50">
                         <ul class="navbar-nav flex-row gap-5">
-                            <li class="nav-item d-flex justify-content-center align-items-center fs-5 border-bottom border-3 border-primary">
+                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
                                 <i class="bi bi-house-door"></i>
                             </li>
                             <li class="nav-item d-flex justify-content-center align-items-center fs-5">
