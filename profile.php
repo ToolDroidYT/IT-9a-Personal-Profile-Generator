@@ -286,7 +286,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                         </li>
                         <li class="nav-item ratio ratio-1x1 position-relative d-flex"
                             style="width: 2.5rem; height: 2.5rem;">
-                            <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle"
+                            <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle object-fit-cover"
                                 src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
                                 alt="Profile picture">
                             <!-- The arrow down icon thingy -->
@@ -326,7 +326,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle"
                 style="width: 168px; height: 168px; margin-top: -100px; border: 4px solid var(--bs-body); z-index: 1;">
                 <img src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
-                    alt="Profile picture" class="img w-100 rounded-circle h-100">
+                    alt="Profile picture" class="img w-100 rounded-circle h-100 object-fit-cover">
             </div>
             <!-- Name -->
             <h1 class="mt-3 mb-0 fw-bold d-flex align-items-center justify-content-center"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?><i class="bi bi-patch-check-fill text-info fs-5 ms-2" style="margin-top: 0.5rem;"></i></h1>
@@ -596,7 +596,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                                 <div class="d-flex flex-row-reverse justify-content-end">
                                     <?php foreach ((array) $reaction_keys as $key): ?>
                                         <img src="./assets/images/reactions/<?= $reactions[$key] ?>.png" width="18" height="18"
-                                            class="rounded-circle border border-2 ms-n2"
+                                            class="rounded-circle border border-2 ms-n2 object-fit-cover"
                                             style="margin-left: -5px; position: relative; z-index: 1; border-color: var(--bs-tertiary-bg) !important;"
                                             alt="reaction">
                                     <?php endforeach; ?>
