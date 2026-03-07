@@ -479,18 +479,59 @@ $reactions = ['like', 'heart', 'care', 'wow'];
 
                 <h3 class="fs-5 fw-bold my-3 ms-2">Posts</h3>
 
+                <?php
+                function getFuzzyTime($timestamp)
+                {
+                    $now = new DateTime();
+                    $ago = new DateTime();
+                    $ago->setTimestamp($timestamp);
+                    $diff = $now->diff($ago);
+
+                    $days = $diff->d;
+                    $hours = $diff->h;
+                    $mins = $diff->i;
+
+                    if ($days == 0) {
+                        if ($hours == 0) {
+                            if ($mins <= 1)
+                                return "Just now";
+                            return $mins . " mins ago";
+                        }
+                        return $hours . " " . ($hours == 1 ? "hr" : "hrs") . " ago";
+                    } elseif ($days == 1) {
+                        return "Yesterday at " . $ago->format('g:i A');
+                    } elseif ($days < 7) {
+                        return $ago->format('l \a\t g:i A'); // like: Tuesday at 8:00 PM
+                    } else {
+                        return $ago->format('F j \a\t g:i A'); // like: March 7 at 10:18 PM
+                    }
+                }
+                ?>
+
                 <!-- Posts -->
                 <div class="d-flex flex-column gap-3">
+                    <?php
+                    // Random timestamps for posts
+                    $timestamps = [];
+                    for ($i = 0; $i < $posts_count; $i++) {
+                        $seconds = 6 * 30 * 24 * 60 * 60; // 6 months in seconds
+                        $timestamps[] = time() - rand(0, $seconds);
+                    }
+
+                    rsort($timestamps);
+                    ?>
+
                     <?php for ($post_idx = 0; $post_idx < $posts_count; $post_idx++): ?>
                         <?php
-                        // 1. Calculate random dimensions and stats
-                        $img_height = rand(400, 800); // Fixed: rand() used directly to avoid min() 400px bug
+                        $current_time = $timestamps[$post_idx];
+                        $display_time = getFuzzyTime($current_time);
+
+                        // Calculate random dimensions and stuff
+                        $img_height = rand(400, 800);
                         $likes = generate_random_number(0, 2000);
-                        $shares = generate_random_number(0, min($likes, rand(1, 500))); // Shares should not exceed likes
+                        $shares = generate_random_number(0, min($likes, rand(1, 500)));
                         $comments = generate_random_number(0, $likes * 2);
 
-                        // 2. Efficient Reaction Selection
-                        // array_rand returns keys. We use a foreach later to avoid index errors.
                         $reaction_keys = array_rand($reactions, min(3, count($reactions)));
                         ?>
 
@@ -504,7 +545,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                                     <span class="fw-medium d-block m-0 p-0">
                                         <?= $fullname ? htmlspecialchars($fullname) : '<em>Unknown User</em>'; ?>
                                     </span>
-                                    <small class="text-muted">Just now &middot; <i class="bi bi-globe-americas"
+                                    <small class="text-muted"><?= $display_time ?> &middot; <i class="bi bi-globe-americas"
                                             style="font-size: 0.8rem;"></i></small>
                                 </div>
                             </div>
@@ -523,7 +564,8 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                                     <?php foreach ((array) $reaction_keys as $key): ?>
                                         <img src="./assets/images/reactions/<?= $reactions[$key] ?>.png" width="18" height="18"
                                             class="rounded-circle border border-2 ms-n2"
-                                            style="margin-left: -5px; position: relative; z-index: 1; border-color: var(--bs-tertiary-bg) !important;" alt="reaction">
+                                            style="margin-left: -5px; position: relative; z-index: 1; border-color: var(--bs-tertiary-bg) !important;"
+                                            alt="reaction">
                                     <?php endforeach; ?>
                                 </div>
                                 <span class="text-muted flex-grow-1"><?= formatNumber($likes) ?></span>
@@ -561,7 +603,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
+        </script>
 </body>
 
 </html>
