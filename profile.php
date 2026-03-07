@@ -134,25 +134,25 @@ $banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir)
 </head>
 
 <body>
-    <!-- TODO: Create a Facebook-style profile page -->
     <header>
-
         <!-- Navbar -->
-        <nav class="navbar bg-body-primary shadow-sm ">
-            <div class="container flex-row flex-nowrap d-flex">
-                <div class="d-flex align-items-center justify-content-center">
+        <nav class="navbar bg-body-primary shadow-sm border-bottom border-opacity-25">
+            <div class="flex-row flex-nowrap d-flex w-100 align-items-center">
+                <!-- 1 -->
+                <div class="d-flex align-items-center justify-content-center flex-fill ms-4">
                     <a href="#" class="navbar-brand fw-bold">Pisbok</a>
                     <!-- Search -->
                     <form class="form-inline position-relative">
-                        <input class="form-control w-50 rounded-pill d-lg-block d-none bg-body-tertiary border-0" type="search" placeholder="      Search" aria-label="Search">
+                        <input class="form-control rounded-pill d-lg-block d-none bg-body-tertiary border-0" type="search" placeholder="      Search" aria-label="Search">
                         <i class="bi bi-search position-absolute  d-lg-block d-none" style="left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 14px;"></i>
                         <i class="bi bi-search d-lg-none d-block bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" style="width: 2.5rem; height: 2.5rem; font-size: 14px;"></i>
                     </form>
                 </div>
 
-                <div class="flex-fill d-flex align-items-center justify-content-center">
-                    <nav class="w-50">
-                        <ul class="navbar-nav flex-row gap-5">
+                <!-- 2 -->
+                <div class="d-flex align-items-center justify-content-center flex-fill d-none d-sm-block">
+                    <nav class="">
+                        <ul class="navbar-nav flex-row gap-5 align-items-center justify-content-center ">
                             <li class="nav-item d-flex justify-content-center align-items-center fs-5">
                                 <i class="bi bi-house-door"></i>
                             </li>
@@ -172,9 +172,10 @@ $banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir)
                     </nav>
                 </div>
 
-                <div class="flex-column align-items-end">
+                <!-- 3 -->
+                <div class="flex-column align-items-end flex-fill justify-content-end">
                     <nav>
-                        <ul class="navbar-nav flex-row gap-2 align-items-end">
+                        <ul class="navbar-nav flex-row gap-2 align-items-end justify-content-end me-4">
                             <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
                                 <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-grid-3x3-gap-fill"></i>
                             </li>
@@ -194,7 +195,6 @@ $banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir)
                 </div>
             </div>
         </nav>
-
     </header>
 
 
