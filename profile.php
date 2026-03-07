@@ -171,7 +171,23 @@ function generate_random_number($min, $max)
 
 $friends_count = generate_random_number(100, 1000);
 $mutual_friends_count = generate_random_number(10, min($friends_count, 100));
-$posts_count = generate_random_number(30, 100);
+$posts_count = generate_random_number(10, 96);
+
+function formatNumber($number)
+{
+    if ($number < 1000) {
+        return (string) $number;
+    }
+
+    if ($number < 1000000) {
+        $formatted = $number / 1000;
+        return (round($formatted, 1) == (int)$formatted ? (int)$formatted : round($formatted, 1)) . 'K';
+    }
+
+    return number_format($number);
+}
+
+$reactions = ['like', 'heart', 'care', 'wow'];
 ?>
 
 <!DOCTYPE html>
@@ -466,7 +482,14 @@ $posts_count = generate_random_number(30, 100);
                 <!-- Posts -->
                 <div class="d-flex flex-column gap-3">
                     <?php for ($i = 0; $i < $posts_count; $i++): ?>
-                        <?php $img_height = min(400, rand(400, 800)); ?>
+                        <?php
+                        $img_height = rand(200, 400);
+                        $likes = generate_random_number(0, 2000);
+                        $shares = generate_random_number(0, $likes);
+                        $comments = generate_random_number(0, $likes);
+
+                        $post_reactions = array_rand($reactions, 3);
+                        ?>
                         <div class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-3">
                             <div class="d-flex flex-row gap-2 mb-3">
                                 <!-- Header -->
@@ -482,11 +505,25 @@ $posts_count = generate_random_number(30, 100);
                             </div>
                             <div>
                                 <!-- Post image -->
-                                <img src="https://picsum.photos/800/<?php echo $img_height; ?>?random=<?php echo ''; ?>"
-                                    alt="Image post" 
+                                <img src="https://picsum.photos/800/<?php echo $img_height; ?>?random=<?php echo $i; ?>"
+                                    alt="Image post"
                                     loading="lazy"
-                                    class="w-100 rounded-3 mb-2 bg-body-secondary"
-                                    style="min-height: <?php echo $img_height ?>px;">
+                                    class="w-100 rounded-3 mb-2 bg-body-secondary object-fit-cover"
+                                    style="height: <?php echo $img_height ?>px;">
+                            </div>
+                            <div class="d-flex flex-row gap-2 mx-3" style="font-size: 0.9rem;">
+                                <div class="d-flex flex-row">
+                                    <?php for ($i = 3; $i > 0; $i--): ?>
+                                        <img src="./assets/images/reactions/<?= $post_reactions[$i] ?>.png" width="16px" alt="Reaction image">
+                                    <?php endfor; ?>
+                                </div>
+                                <span class="text-muted flex-grow-1"><?= formatNumber($likes) ?></span>
+                                <?php if ($comments && $comments > 0): ?>
+                                    <span class="text-muted"><?= formatNumber($shares) ?> comments</span>
+                                <?php endif; ?>
+                                <?php if ($shares && $shares > 0): ?>
+                                    <span class="text-muted"><?= formatNumber($shares) ?> shares</span>
+                                <?php endif; ?>
                             </div>
                             <!-- Like, Comment, and Share -->
                             <div class="d-flex">
@@ -507,6 +544,7 @@ $posts_count = generate_random_number(30, 100);
                                 </button>
                             </div>
                         </div>
+                        <?php $post_reactions = null; ?>
                     <?php endfor; ?>
                 </div>
             </div>
