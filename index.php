@@ -115,7 +115,7 @@
                                             <label for="dancingHobby" class="form-check-label px-1">Dancing</label>
                                         </div>
                                         <div class="form-check">
-                                            <input id="socialmediaHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="socialmedia">
+                                            <input id="socialmediaHobby" class="form-check-input" type="checkbox" name="hobbies[]" value="social media">
                                             <label for="socialmediaHobby" class="form-check-label px-1">Social media</label>
                                         </div>
                                         <div class="form-check">
