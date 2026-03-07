@@ -171,7 +171,7 @@ function generate_random_number($min, $max)
 
 $friends_count = generate_random_number(100, 1000);
 $mutual_friends_count = generate_random_number(10, min($friends_count, 100));
-$posts_count = generate_random_number(10, 96);
+$posts_count = generate_random_number(8, 24);
 
 function formatNumber($number)
 {
