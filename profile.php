@@ -484,7 +484,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                 <div
                     class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-3 d-flex flex-column w-100">
                     <div class="d-flex flex-row">
-                        <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle"
+                        <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle object-fit-cover flex-shrink-0"
                             src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
                             style="width: 3rem; height: 3rem;" alt="Profile picture">
                         <input type="text" class="form-control rounded-pill bg-body-secondary border-0 ms-2"
