@@ -334,7 +334,7 @@ $posts_count = generate_random_number(30, 100);
 
     <section class="w-100 d-flex justify-content-center mb-5" id="content">
         <div class="container row justify-content-center px-5">
-            <div class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4">
+            <div class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4 sticky-bottom z-n1">
                 <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
 
                 <!-- Birthday -->
@@ -462,6 +462,53 @@ $posts_count = generate_random_number(30, 100);
                 </div>
 
                 <h3 class="fs-5 fw-bold my-3 ms-2">Posts</h3>
+
+                <!-- Posts -->
+                <div class="d-flex flex-column gap-3">
+                    <?php for ($i = 0; $i < $posts_count; $i++): ?>
+                        <?php $img_height = min(400, rand(400, 800)); ?>
+                        <div class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-3">
+                            <div class="d-flex flex-row gap-2 mb-3">
+                                <!-- Header -->
+                                <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle"
+                                    src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
+                                    style="width: 2.5rem; height: 2.5rem;" alt="Profile picture">
+                                <div class="d-flex flex-column gap-0">
+                                    <span
+                                        class="fw-medium d-block m-0 p-0"><?= $fullname ? $fullname : '<em>Unknown</em>'; ?></span>
+                                    <small class="text-muted">Just now &middot; <i class="bi bi-globe-americas"
+                                            style="font-size: 0.8rem;"></i></small>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- Post image -->
+                                <img src="https://picsum.photos/800/<?php echo $img_height; ?>?random=<?php echo ''; ?>"
+                                    alt="Image post" 
+                                    loading="lazy"
+                                    class="w-100 rounded-3 mb-2 bg-body-secondary"
+                                    style="min-height: <?php echo $img_height ?>px;">
+                            </div>
+                            <!-- Like, Comment, and Share -->
+                            <div class="d-flex">
+                                <button
+                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
+                                    <i class="bi bi-hand-thumbs-up fs-5"></i>
+                                    Like
+                                </button>
+                                <button
+                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
+                                    <i class="bi bi-chat fs-5"></i>
+                                    Comment
+                                </button>
+                                <button
+                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
+                                    <i class="bi bi-share fs-5"></i>
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                </div>
             </div>
         </div>
     </section>
