@@ -14,7 +14,9 @@ $profile_picture
     = null;
 
 $hobbies = [];
+
 $age = null;
+$birthday_formatted = null;
 
 $has_profile_image
     = $has_banner_image
@@ -56,11 +58,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') == 'POST') {
     $banner_picture = get_file_meta('bannerpicture');
 }
 
-// Calculate age if birthday is provided
 if ($birthday) {
+    // Calculate age if birthday is provided
     $birthDate = new DateTime($birthday);
     $today = new DateTime();
     $age = $today->diff($birthDate)->y;
+
+    // Format birthday
+    $birthday_formatted = $birthDate->format('F j, Y');
 }
 
 function verify_and_save_uploaded_file($file, $upload_dir)
@@ -109,6 +114,24 @@ if ($banner_picture_file) {
     $has_banner_image = true;
 }
 ?>
+
+<!-- 
+
+    TODO:
+      - $fullname (done)
+      - $birthday (done)
+      - $course (done)
+      - $email (done)
+      - $gender (done)
+      - $biography (done)
+
+      - $profile_picture (done)
+      - $banner_picture (done)
+
+      - $hobbies
+      - $age
+
+-->
 
 <!DOCTYPE html>
 
@@ -206,7 +229,7 @@ if ($banner_picture_file) {
         </div>
     </nav>
 
-    <div class="container">
+    <section class="container" id="profile">
         <!-- Banner -->
         <header class="d-flex w-100 justify-content-center position-relative">
             <img class="h-auto object-fit-cover rounded-3" style="width: 85%; aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>" src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>" alt="Banner image">
@@ -234,22 +257,86 @@ if ($banner_picture_file) {
             <?php endif; ?>
         </div>
 
-        <!-- Biography -->
-        <!-- <div class="container mt-4 pt-4 border-top">
-            <div class="d-flex align-items-start gap-3">
-                <div class="bg-success-subtle text-success rounded p-2">
-                    <i class="bi bi-card-text fs-5"></i>
+        <!-- Horizontal divider thingy -->
+        <div class="container px-4">
+            <hr>
+        </div>
+    </section>
+
+    <section class="w-100 d-flex justify-content-center" id="content">
+
+        <div class="container row justify-content-center px-5">
+            <!-- Two rows
+        Personal Details on the left, Images/posts on the right
+        -->
+            <div class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4">
+                <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
+
+                <!-- Birthday -->
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
+                        <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-cake"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted d-block">Birthday</small>
+                        <span class="fw-medium text-break"><?= $birthday_formatted ? $birthday_formatted : '<em>None</em>'; ?></span>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="fw-bold">Biography</h3>
-                    <p class="text-muted"><?= $biography ? $biography : '<em>No biography provided</em>'; ?></p>
+
+                <!-- Gender -->
+                <?php
+                $gender_icon = null;
+                if ($gender) {
+                    switch (strtolower($gender)) {
+                        case 'male':
+                            $gender_icon = 'bi bi-gender-male';
+                            break;
+                        case 'female':
+                            $gender_icon = 'bi bi-gender-female';
+                            break;
+                        default:
+                            $gender_icon = 'bi bi-gender-ambiguous';
+                    }
+                }
+                ?>
+                <?php if (strtolower($gender) !== 'pnts'): ?>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
+                            <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle <?= $gender_icon ?: 'bi bi-gender-ambiguous' ?>"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block">Gender</small>
+                            <span class="fw-medium text-break"><?= $gender ? ucwords($gender) : 'Unknown'; ?></span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Email -->
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
+                        <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-envelope"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted d-block">Email</small>
+                        <span class="fw-medium text-break"><?= $email ? $email : '<em>None</em>'; ?></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6 col-md-8">
+                <h2 class="fs-4 fw-bold mb-3"><i class="bi bi-images me-2"></i>Images</h2>
+                <div class="row g-3">
+                    <!-- Image placeholders or actual images would go here -->
                 </div>
             </div>
-        </div> -->
-    </div>
+        </div>
+    </section>
 
 
-    <!--  <div class="container mt-5 mb-5">
+
+
+    <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
@@ -262,7 +349,7 @@ if ($banner_picture_file) {
                             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle"
                                 style="width: 100px; height: 100px;">
                                 <img src="<?= $profile_picture_file ?>" alt="Profile picture"
-                                 class="img w-100 rounded-circle h-100">
+                                    class="img w-100 rounded-circle h-100">
                             </div>
                             <h3 class="mt-3 mb-0 fw-bold"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?></h3>
                             <p class="text-muted mb-0"><?= $course ? $course : '<em>Course not specified</em>'; ?></p>
@@ -346,7 +433,7 @@ if ($banner_picture_file) {
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
