@@ -133,13 +133,13 @@
 
                             <div class="mb-4">
                                 <label for="formPFP" class="form-label fw-semibold">Profile Picture</label>
-                                <input class="form-control" type="file" accept="image/*" id="formPFP" name="pfp">
+                                <input class="form-control" type="file" accept="image/*" id="formPFP" name="profilepicture">
                             </div>
 
                             <hr class="my-4">
 
                             <div class="d-flex justify-content-end w-100 gap-3">
-                                <button type="reset" class="btn btn-outline-danger px-4 py-2 fw-medium"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
+                                <button type="reset" onclick="clearSavedData()" class="btn btn-outline-danger px-4 py-2 fw-medium"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
                                 <button type="submit" class="btn btn-primary px-4 py-2 fw-medium shadow-sm"><i class="bi bi-check2-circle me-1"></i>Generate Profile</button>
                             </div>
                         </form>
@@ -151,6 +151,62 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    </script>
+
+    <script>
+        // Auto save form data, for development purposes
+        // So it doesn't get lost when refreshing the page
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const formFields = form.querySelectorAll('input, textarea');
+            formFields.forEach(field => {
+                field.addEventListener('input', () => {
+                    if (field.type === 'checkbox') {
+                        const checkboxes = form.querySelectorAll(`input[name="${field.name}"]`);
+                        const checkedValues = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+                        localStorage.setItem(field.name, JSON.stringify(checkedValues));
+                    } else if (field.type === 'radio') {
+                        if (field.checked) {
+                            localStorage.setItem(field.name, field.value);
+                        }
+
+                    } else {
+                        localStorage.setItem(field.name, field.value);
+                    }
+                });
+
+                // Load saved data on page load
+                const savedValue = localStorage.getItem(field.name);
+                if (savedValue) {
+                    if (field.type === 'checkbox') {
+                        const values = JSON.parse(savedValue);
+                        if (values.includes(field.value)) {
+                            field.checked = true;
+                        }
+                    } else if (field.type === 'radio') {
+                        if (field.value === savedValue) {
+                            field.checked = true;
+                        }
+                    } else {
+                        field.value = savedValue;
+                    }
+                }
+            });
+
+
+        });
+
+        // Clear saved data from localStorage when resetting the form
+        function clearSavedData() {
+            const form = document.querySelector('form');
+            const formFields = form.querySelectorAll('input, textarea');
+
+            form.reset();
+            formFields.forEach(field => {
+                localStorage.removeItem(field.name);
+            });
+        }
     </script>
 </body>
 
