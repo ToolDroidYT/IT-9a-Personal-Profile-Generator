@@ -133,7 +133,12 @@
 
                             <div class="mb-4">
                                 <label for="formPFP" class="form-label fw-semibold">Profile Picture</label>
-                                <input class="form-control" type="file" accept="image/*" id="formPFP" name="profilepicture">
+                                <input class="form-control" type="file" accept="image/*" id="formPFP" name="profilepicture" required>
+                            </div>
+                           
+                            <div class="mb-4">
+                                <label for="formPFP" class="form-label fw-semibold">Banner Picture <sub>(Optional)</sub></label>
+                                <input class="form-control" type="file" accept="image/*" id="formPFP" name="bannerpicture">
                             </div>
 
                             <hr class="my-4">
