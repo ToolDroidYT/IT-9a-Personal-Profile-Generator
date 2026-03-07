@@ -329,7 +329,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                     alt="Profile picture" class="img w-100 rounded-circle h-100">
             </div>
             <!-- Name -->
-            <h1 class="mt-3 mb-0 fw-bold"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?></h1>
+            <h1 class="mt-3 mb-0 fw-bold d-flex align-items-center justify-content-center"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?><i class="bi bi-patch-check-fill text-info fs-5 ms-2" style="margin-top: 0.5rem;"></i></h1>
             <!-- Course -->
             <p class="text-muted mb-0"><?= $course ? $course : '<em>Course not specified</em>'; ?></p>
             <!-- Friends, Mutuals, and Posts -->
