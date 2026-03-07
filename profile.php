@@ -368,13 +368,14 @@ if ($banner_picture_file) {
                 <h3 class="fs-5 fw-bold my-3">Hobbies</h3>
                 <!-- Hobbies -->
                 <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2 flex-shrink-0" style="width: 2.5rem; height: 2.5rem;">
                         <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-dice-3"></i>
                     </div>
                     <div class="d-flex flex-row flex-wrap gap-2">
                         <?php for ($i = 0; $i < count($hobbies); $i++): ?>
                             <span class="badge bg-secondary-subtle bg-opacity-25 text-primary-emphasis border border-secondary-subtle border-opacity-25">
-                                <!-- <i class="<?= $hobby_icon[$i] ?? 'bi bi-question-circle' ?>"></i> --> <?= ucwords($hobbies[$i]) ?>
+                                <!-- <i class="<?= $hobby_icon[$i] ?? 'bi bi-question-circle' ?>"></i> -->
+                                <?= ucwords($hobbies[$i]) ?>
                             </span>
                         <?php endfor; ?>
                     </div>
