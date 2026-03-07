@@ -181,7 +181,7 @@ function formatNumber($number)
 
     if ($number < 1000000) {
         $formatted = $number / 1000;
-        return (round($formatted, 1) == (int)$formatted ? (int)$formatted : round($formatted, 1)) . 'K';
+        return (round($formatted, 1) == (int) $formatted ? (int) $formatted : round($formatted, 1)) . 'K';
     }
 
     return number_format($number);
@@ -481,70 +481,78 @@ $reactions = ['like', 'heart', 'care', 'wow'];
 
                 <!-- Posts -->
                 <div class="d-flex flex-column gap-3">
-                    <?php for ($i = 0; $i < $posts_count; $i++): ?>
+                    <?php for ($post_idx = 0; $post_idx < $posts_count; $post_idx++): ?>
                         <?php
-                        $img_height = rand(200, 400);
+                        // 1. Calculate random dimensions and stats
+                        $img_height = rand(400, 800); // Fixed: rand() used directly to avoid min() 400px bug
                         $likes = generate_random_number(0, 2000);
-                        $shares = generate_random_number(0, $likes);
-                        $comments = generate_random_number(0, $likes);
+                        $shares = generate_random_number(0, min($likes, rand(1, 500))); // Shares should not exceed likes
+                        $comments = generate_random_number(0, $likes * 2);
 
-                        $post_reactions = array_rand($reactions, 3);
+                        // 2. Efficient Reaction Selection
+                        // array_rand returns keys. We use a foreach later to avoid index errors.
+                        $reaction_keys = array_rand($reactions, min(3, count($reactions)));
                         ?>
-                        <div class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-3">
+
+                        <div class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-3 pb-2">
+                            <!-- Header -->
                             <div class="d-flex flex-row gap-2 mb-3">
-                                <!-- Header -->
-                                <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle"
-                                    src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
-                                    style="width: 2.5rem; height: 2.5rem;" alt="Profile picture">
+                                <img class="bg-body-tertiary d-flex justify-content-center align-items-center rounded-circle"
+                                    src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/100/100?random=' . $post_idx ?>"
+                                    style="width: 2.5rem; height: 2.5rem; object-fit: cover;" alt="Profile picture">
                                 <div class="d-flex flex-column gap-0">
-                                    <span
-                                        class="fw-medium d-block m-0 p-0"><?= $fullname ? $fullname : '<em>Unknown</em>'; ?></span>
+                                    <span class="fw-medium d-block m-0 p-0">
+                                        <?= $fullname ? htmlspecialchars($fullname) : '<em>Unknown User</em>'; ?>
+                                    </span>
                                     <small class="text-muted">Just now &middot; <i class="bi bi-globe-americas"
                                             style="font-size: 0.8rem;"></i></small>
                                 </div>
                             </div>
-                            <div>
-                                <!-- Post image -->
-                                <img src="https://picsum.photos/800/<?php echo $img_height; ?>?random=<?php echo $i; ?>"
-                                    alt="Image post"
-                                    loading="lazy"
-                                    class="w-100 rounded-3 mb-2 bg-body-secondary object-fit-cover"
-                                    style="height: <?php echo $img_height ?>px;">
+
+                            <!-- Post content -->
+                            <div class="mb-2">
+                                <img src="https://picsum.photos/800/<?= $img_height; ?>?random=<?= $post_idx; ?>"
+                                    alt="Post content" loading="lazy"
+                                    class="w-100 rounded-3 bg-body-secondary object-fit-cover"
+                                    style="height: <?= $img_height ?>px; min-height: 200px;">
                             </div>
-                            <div class="d-flex flex-row gap-2 mx-3" style="font-size: 0.9rem;">
-                                <div class="d-flex flex-row">
-                                    <?php for ($i = 3; $i > 0; $i--): ?>
-                                        <img src="./assets/images/reactions/<?= $post_reactions[$i] ?>.png" width="16px" alt="Reaction image">
-                                    <?php endfor; ?>
+
+                            <!-- Reactions and Stuff -->
+                            <div class="d-flex flex-row align-items-center gap-2 px-1 mb-2" style="font-size: 0.9rem;">
+                                <div class="d-flex flex-row-reverse justify-content-end">
+                                    <?php foreach ((array) $reaction_keys as $key): ?>
+                                        <img src="./assets/images/reactions/<?= $reactions[$key] ?>.png" width="18" height="18"
+                                            class="rounded-circle border border-2 ms-n2"
+                                            style="margin-left: -5px; position: relative; z-index: 1; border-color: var(--bs-tertiary-bg) !important;" alt="reaction">
+                                    <?php endforeach; ?>
                                 </div>
                                 <span class="text-muted flex-grow-1"><?= formatNumber($likes) ?></span>
-                                <?php if ($comments && $comments > 0): ?>
-                                    <span class="text-muted"><?= formatNumber($shares) ?> comments</span>
+
+                                <?php if ($comments > 0): ?>
+                                    <span class="text-muted"><?= formatNumber($comments) ?> comments</span>
                                 <?php endif; ?>
-                                <?php if ($shares && $shares > 0): ?>
+
+                                <?php if ($shares > 0): ?>
                                     <span class="text-muted"><?= formatNumber($shares) ?> shares</span>
                                 <?php endif; ?>
                             </div>
-                            <!-- Like, Comment, and Share -->
-                            <div class="d-flex">
+
+                            <!-- Like, Comment, Share -->
+                            <div class="d-flex border-top pt-2">
                                 <button
-                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
-                                    <i class="bi bi-hand-thumbs-up fs-5"></i>
-                                    Like
+                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1 hover-bg">
+                                    <i class="bi bi-hand-thumbs-up fs-5"></i> Like
                                 </button>
                                 <button
-                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
-                                    <i class="bi bi-chat fs-5"></i>
-                                    Comment
+                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1 hover-bg">
+                                    <i class="bi bi-chat fs-5"></i> Comment
                                 </button>
                                 <button
-                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
-                                    <i class="bi bi-share fs-5"></i>
-                                    Share
+                                    class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1 hover-bg">
+                                    <i class="bi bi-share fs-5"></i> Share
                                 </button>
                             </div>
                         </div>
-                        <?php $post_reactions = null; ?>
                     <?php endfor; ?>
                 </div>
             </div>
