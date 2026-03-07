@@ -1,8 +1,19 @@
 <?php
-$fullname = $birthday = $course = $email = $gender = $biography = "";
+$fullname
+    = $birthday
+    = $course
+    = $email
+    = $gender
+    = $biography
+    = "";
+
+$profile_picture
+    = $profile_picture_file
+    = $banner_picture
+    = $banner_picture_file
+    = null;
+
 $hobbies = [];
-$profile_picture = null;
-$profile_picture_file = null;
 $age = null;
 
 function sanitize_input($data)
@@ -36,43 +47,54 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') == 'POST') {
     $gender = get_post_meta('gender');
     $hobbies = get_post_meta('hobbies') ?? [];
     $biography = get_post_meta('biography');
+
     $profile_picture = get_file_meta('profilepicture');
+    $banner_picture = get_file_meta('bannerpicture');
 }
 
+// Calculate age if birthday is provided
 if ($birthday) {
     $birthDate = new DateTime($birthday);
     $today = new DateTime();
     $age = $today->diff($birthDate)->y;
 }
 
-// Save profile picture to ./temp/images/
-if ($profile_picture) {
-    $temp_dir = './assets/temp/images/';
-    $profile_picture_file = $temp_dir . $profile_picture['name'];
-
-    if (!is_dir($temp_dir)) {
-        mkdir($temp_dir, 0755, true);
+function verify_and_save_uploaded_file($file, $upload_dir)
+{
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
     }
-    if (!is_file($profile_picture_file)) {
-        move_uploaded_file($profile_picture['tmp_name'], $profile_picture_file);
-    } else {
-        // If file already exists, use the existing file instead of uploading again
-        $profile_picture['name'] = basename($profile_picture_file);
+    if (!is_writable($upload_dir)) {
+        return false;
     }
 
-    // Check if file is a valid image
-    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-    if (!in_array($profile_picture['type'], $allowed_types)) {
-        $profile_picture_file = null; // Invalid file type, do not use the uploaded file
-    }
+    if ($file && $file['error'] === UPLOAD_ERR_OK) {
+        $filename = basename($file['name']);
+        $target_file = $upload_dir . $filename;
 
-    // Check if file size is invalid or larger than 10MB
-    $current_file_size = $profile_picture['size'];
-    $max_file_size = 10 * 1024 * 1024; // 10MB in bytes
-    if ($current_file_size <= 0 || $current_file_size > $max_file_size) {
-        $profile_picture_file = null; // Invalid file size, do not use the uploaded file
+        // Check if file is a valid image
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($file['type'], $allowed_types)) {
+            return false; // Invalid file type, do not use the uploaded file
+        }
+
+        // Check if file size is invalid or larger than 10MB
+        $current_file_size = $file['size'];
+        $max_file_size = 10 * 1024 * 1024; // 10MB in bytes
+        if ($current_file_size <= 0 || $current_file_size > $max_file_size) {
+            return false; // Invalid file size, do not use the uploaded file
+        }
+
+        if (move_uploaded_file($file['tmp_name'], $target_file)) {
+            return $target_file; // Return the path to the saved file
+        }
     }
+    return false;
 }
+
+$temp_dir = './assets/temp/images/';
+$profile_picture_file = verify_and_save_uploaded_file($profile_picture, $temp_dir);
+$banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir);
 ?>
 
 <!DOCTYPE html>
@@ -93,12 +115,14 @@ if ($profile_picture) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile View</title>
+    <title>Pisbok - <?= $fullname ?? 'Profile' ?></title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
         rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -108,7 +132,71 @@ if ($profile_picture) {
 </head>
 
 <body>
-    <div class="container mt-5 mb-5">
+    <!-- TODO: Create a Facebook-style profile page -->
+    <header>
+
+        <!-- Navbar -->
+        <nav class="navbar bg-body-primary shadow-sm ">
+            <div class="container flex-row flex-nowrap d-flex">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="#" class="navbar-brand fw-bold">Pisbok</a>
+                    <!-- Search -->
+                    <form class="form-inline position-relative">
+                        <input class="form-control w-50 rounded-pill d-lg-block d-none bg-body-tertiary border-0" type="search" placeholder="      Search" aria-label="Search">
+                        <i class="bi bi-search position-absolute  d-lg-block d-none" style="left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 14px;"></i>
+                        <i class="bi bi-search d-lg-none d-block bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" style="width: 2.5rem; height: 2.5rem; font-size: 14px;"></i>
+                    </form>
+                </div>
+
+                <div class="flex-fill d-flex align-items-center justify-content-center">
+                    <nav class="w-50">
+                        <ul class="navbar-nav flex-row gap-5">
+                            <li class="nav-item d-flex justify-content-center align-items-center fs-5 border-bottom border-3 border-primary">
+                                <i class="bi bi-house-door"></i>
+                            </li>
+                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                                <i class="bi bi-collection-play"></i>
+                            </li>
+                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                                <i class="bi bi-shop-window"></i>
+                            </li>
+                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                                <i class="bi bi-people"></i>
+                            </li>
+                            <li class="nav-item d-flex justify-content-center align-items-center fs-5">
+                                <i class="bi bi-controller"></i>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="flex-column align-items-end">
+                    <nav>
+                        <ul class="navbar-nav flex-row gap-2 align-items-end">
+                            <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-grid-3x3-gap-fill"></i>
+                            </li>
+                            <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-chat-dots-fill"></i>
+                            </li>
+                            <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
+                                <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-bell"></i>
+                            </li>
+                            <li class="nav-item ratio ratio-1x1 position-relative d-flex" style="width: 2.5rem; height: 2.5rem;">
+                                <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" src="<?= $profile_picture_file ?>">
+                                <!-- The arrow down icon thingy -->
+                                <i class="bi bi-chevron-down rounded-circle d-flex justify-content-center align-items-center position-absolute align-self-end bg-body-secondary text-light" style="width: 0.8rem; height: 0.8rem; bottom: 0; right: 0; font-size: 8px; justify-self: end;"></i>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+
+    <!--  <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
@@ -120,7 +208,8 @@ if ($profile_picture) {
                         <div class="text-center mb-4">
                             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle"
                                 style="width: 100px; height: 100px;">
-                                <img src="<?= $profile_picture_file ?>" alt="Profile picture" class="img w-100 rounded-circle h-100">
+                                <img src="<?= $profile_picture_file ?>" alt="Profile picture"
+                                 class="img w-100 rounded-circle h-100">
                             </div>
                             <h3 class="mt-3 mb-0 fw-bold"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?></h3>
                             <p class="text-muted mb-0"><?= $course ? $course : '<em>Course not specified</em>'; ?></p>
@@ -204,7 +293,7 @@ if ($profile_picture) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
