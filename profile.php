@@ -229,7 +229,10 @@ $reactions = ['like', 'heart', 'care', 'wow'];
     <nav class="navbar bg-body shadow-sm border-bottom border-opacity-25 sticky-top">
         <div class="flex-row flex-nowrap d-flex w-100 align-items-center">
             <!-- 1 -->
-            <div class="d-flex align-items-center justify-content-center flex-fill ms-4">
+            <div class="d-flex align-items-center justify-content-start flex-fill ms-4">
+                <a href="./index.php"
+                    class="me-3 btn-outline-secondary text-decoration-none text-body d-flex flex-row align-items-center justify-content-center"><i
+                        class="bi bi-chevron-left fs-5 text-body"></i><small style="margin-top: -2px;">Back</small></a>
                 <a href="#" class="navbar-brand fw-bold">Pisbok</a>
                 <!-- Search -->
                 <form class="form-inline position-relative">
@@ -350,7 +353,8 @@ $reactions = ['like', 'heart', 'care', 'wow'];
 
     <section class="w-100 d-flex justify-content-center mb-5" id="content">
         <div class="container row justify-content-center px-5">
-            <div class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4 sticky-bottom z-n1">
+            <div
+                class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4 sticky-bottom z-n1 align-self-start">
                 <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
 
                 <!-- Birthday -->
