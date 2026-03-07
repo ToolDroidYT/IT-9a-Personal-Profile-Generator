@@ -299,7 +299,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
         </div>
     </nav>
 
-    <section class="container position-relative" id="profile">
+    <section class="container position-relative overflow-x-hidden" id="profile">
         <!-- Backdrop banner -->
         <img class="h-auto object-fit-cover rounded-3 position-absolute top-0 start-50 translate-middle-x opacity-25"
             style="pointer-events: none; filter: blur(32px) grayscale(50%); width: 110%; aspect-ratio: 2.5/1.2; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;"
