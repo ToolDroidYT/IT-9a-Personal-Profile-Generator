@@ -357,9 +357,9 @@ $reactions = ['like', 'heart', 'care', 'wow'];
         </div>
     </section>
 
-    <section class="w-100 d-flex justify-content-center mb-5" id="content">
-        <div class="container row justify-content-center px-0 px-md-5">
-            <div class="col-lg-6 col-md-8 align-self-start mb-3">
+    <section class="w-100 d-flex justify-content-center mb-5 position-relative" id="content">
+        <div class="container row justify-content-center px-0 px-md-5 position-relative">
+            <div class="col-lg-6 col-md-8 align-self-start mb-3 position-relative">
                 <div
                     class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-4">
                     <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
@@ -457,7 +457,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                 </div>
 
                 <!-- Photos -->
-                <div class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-4 mt-3">
+                <div class="card border-0 shadow-sm rounded-4 bg-body-tertiary p-4 mt-3 position-relative">
                     <h3 class="fs-5 fw-bold mb-3">Photos</h3>
                     <div class="d-flex flex-column g-2">
                         <?php for ($i = 0; $i < 3; $i++): ?>
