@@ -16,6 +16,8 @@ $profile_picture
 $hobbies = [];
 
 $age = null;
+$age_text = '?';
+$birthday_in_days = null;
 $birthday_formatted = null;
 
 $has_profile_image
@@ -58,6 +60,29 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') == 'POST') {
     $banner_picture = get_file_meta('bannerpicture');
 }
 
+function getNearestBirthdayText(DateTime $birthDate, DateTime $today)
+{
+    $thisYearBirthday = new DateTime($today->format('Y') . '-' . $birthDate->format('m-d'));
+
+    $lastBirthday = clone $thisYearBirthday;
+    $nextBirthday = clone $thisYearBirthday;
+
+    if ($thisYearBirthday > $today) {
+        $lastBirthday->modify('-1 year');
+    } else {
+        $nextBirthday->modify('+1 year');
+    }
+
+    $daysSinceLast = $today->diff($lastBirthday)->days;
+    $daysUntilNext = $today->diff($nextBirthday)->days;
+
+    if ($daysUntilNext <= $daysSinceLast) {
+        return "$daysUntilNext days from now";
+    } else {
+        return "$daysSinceLast days ago";
+    }
+}
+
 if ($birthday) {
     // Calculate age if birthday is provided
     $birthDate = new DateTime($birthday);
@@ -66,6 +91,13 @@ if ($birthday) {
 
     // Format birthday
     $birthday_formatted = $birthDate->format('F j, Y');
+
+    // Calculate last or next birthday in days based on what is the nearest
+    $birthday_in_days = getNearestBirthdayText($birthDate, $today);
+
+    // Format age text
+    $interval = $today->diff($birthDate);
+    $age_text = $interval->format('%y years %m months and %d days');
 }
 
 function verify_and_save_uploaded_file($file, $upload_dir)
@@ -103,7 +135,7 @@ function verify_and_save_uploaded_file($file, $upload_dir)
     return false;
 }
 
-$temp_dir = './assets/temp/images/';
+$temp_dir = './assets/temp/uploads/images/';
 $profile_picture_file = verify_and_save_uploaded_file($profile_picture, $temp_dir);
 $banner_picture_file = verify_and_save_uploaded_file($banner_picture, $temp_dir);
 
@@ -129,7 +161,7 @@ if ($banner_picture_file) {
       - $banner_picture (done)
 
       - $hobbies
-      - $age
+      - $age (done)
 
 -->
 
@@ -266,9 +298,6 @@ if ($banner_picture_file) {
     <section class="w-100 d-flex justify-content-center" id="content">
 
         <div class="container row justify-content-center px-5">
-            <!-- Two rows
-        Personal Details on the left, Images/posts on the right
-        -->
             <div class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4">
                 <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
 
@@ -279,7 +308,21 @@ if ($banner_picture_file) {
                     </div>
                     <div>
                         <small class="text-muted d-block">Birthday</small>
-                        <span class="fw-medium text-break"><?= $birthday_formatted ? $birthday_formatted : '<em>None</em>'; ?></span>
+                        <span class="fw-medium text-break">
+                            <?= ($birthday_formatted ? $birthday_formatted : '<em>None</em>') ?>
+                            <small class="text-muted">(<?= $birthday_in_days ?>)</small>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Age -->
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
+                        <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-hourglass-split"></i>
+                    </div>
+                    <div>
+                        <small class="text-muted d-block">Age</small>
+                        <span class="fw-medium text-break"><?= $age_text ?></span>
                     </div>
                 </div>
 
