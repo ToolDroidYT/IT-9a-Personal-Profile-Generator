@@ -230,7 +230,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
         <div class="flex-row flex-nowrap d-flex w-100 align-items-center overflow-hidden">
             <!-- 1 -->
             <div class="d-flex align-items-center justify-content-start flex-fill ms-4">
-                <a href="./index.php"
+                <a href="javascript:history.back()"
                     class="me-3 btn-outline-secondary text-decoration-none text-body d-flex flex-row align-items-center justify-content-center d-none d-md-flex"><i
                         class="bi bi-chevron-left fs-5 text-body"></i><small style="margin-top: -2px;">Back</small></a>
                 <a href="#" class="navbar-brand fw-bold">Pisbok</a>
@@ -302,20 +302,20 @@ $reactions = ['like', 'heart', 'care', 'wow'];
     <section class="container position-relative" id="profile">
         <!-- Backdrop banner -->
         <img class="h-auto object-fit-cover rounded-3 position-absolute top-0 start-50 translate-middle-x opacity-25"
-            style="pointer-events: none; filter: blur(32px) grayscale(50%); width: 110%; aspect-ratio: 2.5/1.2; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>"
+            style="pointer-events: none; filter: blur(32px) grayscale(50%); width: 110%; aspect-ratio: 2.5/1.2; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important;"
             src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>"
             alt="Banner image">
 
         <!-- Banner -->
         <header class="d-flex w-100 justify-content-center position-relative">
             <img class="h-auto object-fit-cover rounded-3 banner-width"
-                style="aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>"
+                style="aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(2px) grayscale(85%);' ?>"
                 src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>"
                 alt="Banner image">
             <?php if (!$has_banner_image): ?>
                 <div class="position-absolute top-0 d-flex justify-content-start align-items-end w-100 h-100 rounded-3 d-none d-md-flex"
                     style="left: 9%">
-                    <p class="bg-info-subtle text-info py-1 px-2 rounded-2 opacity-25">No banner provided</p>
+                    <p class="bg-info-subtle text-info py-1 px-2 rounded-2 opacity-50">No banner provided</p>
                 </div>
             <?php endif; ?>
         </header>

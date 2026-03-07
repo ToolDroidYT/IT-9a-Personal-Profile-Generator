@@ -40,7 +40,7 @@
                         <h2 class="mb-0 fs-3 fw-bold"><i class="bi bi-person-lines-fill me-2"></i>Profile Generator</h2>
                     </div>
                     <div class="card-body p-4 p-md-5">
-                        <form action="./profile.php" method="POST" target="_blank" enctype="multipart/form-data">
+                        <form action="./profile.php" method="POST" enctype="multipart/form-data">
 
                             <h5 class="mb-3 text-secondary border-bottom pb-2">Personal Information</h5>
 
