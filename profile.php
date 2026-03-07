@@ -145,10 +145,27 @@ if ($profile_picture_file) {
 if ($banner_picture_file) {
     $has_banner_image = true;
 }
+
+// Map of hobbies to Bootstrap icons
+$hobby_icons = [
+    'programming' => 'bi-code-slash',
+    'music' => 'bi-music-note-beamed',
+    'basketball' => 'bi-dribbble',
+    'singing' => 'bi-mic',
+    'dancing' => 'bi-person-walking',
+    'social media' => 'bi-share',
+    'sleeping' => 'bi-moon-stars',
+    'gaming' => 'bi-controller',
+    'reading' => 'bi-book',
+    'traveling' => 'bi-airplane',
+    'cooking' => 'bi-egg-fried',
+    'photography' => 'bi-camera',
+    'drawing' => 'bi-palette',
+    'working out' => 'bi-lightning-charge'
+];
 ?>
 
 <!-- 
-
     TODO:
       - $fullname (done)
       - $birthday (done)
@@ -160,9 +177,8 @@ if ($banner_picture_file) {
       - $profile_picture (done)
       - $banner_picture (done)
 
-      - $hobbies
+      - $hobbies (done)
       - $age (done)
-
 -->
 
 <!DOCTYPE html>
@@ -208,9 +224,12 @@ if ($banner_picture_file) {
                 <a href="#" class="navbar-brand fw-bold">Pisbok</a>
                 <!-- Search -->
                 <form class="form-inline position-relative">
-                    <input class="form-control rounded-pill d-lg-block d-none bg-body-tertiary border-0" type="search" placeholder="      Search" aria-label="Search">
-                    <i class="bi bi-search position-absolute  d-lg-block d-none" style="left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 14px;"></i>
-                    <i class="bi bi-search d-lg-none d-block bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" style="width: 2.5rem; height: 2.5rem; font-size: 14px;"></i>
+                    <input class="form-control rounded-pill d-lg-block d-none bg-body-tertiary border-0" type="search"
+                        placeholder="      Search" aria-label="Search">
+                    <i class="bi bi-search position-absolute  d-lg-block d-none"
+                        style="left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 14px;"></i>
+                    <i class="bi bi-search d-lg-none d-block bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle"
+                        style="width: 2.5rem; height: 2.5rem; font-size: 14px;"></i>
                 </form>
             </div>
 
@@ -242,18 +261,25 @@ if ($banner_picture_file) {
                 <nav>
                     <ul class="navbar-nav flex-row gap-2 align-items-end justify-content-end me-4">
                         <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
-                            <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-grid-3x3-gap-fill"></i>
+                            <i
+                                class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-grid-3x3-gap-fill"></i>
                         </li>
                         <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
-                            <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-chat-dots-fill"></i>
+                            <i
+                                class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-chat-dots-fill"></i>
                         </li>
                         <li class="nav-item ratio ratio-1x1" style="width: 2.5rem; height: 2.5rem;">
-                            <i class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-bell-fill"></i>
+                            <i
+                                class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle bi bi-bell-fill"></i>
                         </li>
-                        <li class="nav-item ratio ratio-1x1 position-relative d-flex" style="width: 2.5rem; height: 2.5rem;">
-                            <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle" src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>" alt="Profile picture">
+                        <li class="nav-item ratio ratio-1x1 position-relative d-flex"
+                            style="width: 2.5rem; height: 2.5rem;">
+                            <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle"
+                                src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
+                                alt="Profile picture">
                             <!-- The arrow down icon thingy -->
-                            <i class="bi bi-chevron-down rounded-circle d-flex justify-content-center align-items-center position-absolute align-self-end bg-body-secondary text-light" style="width: 0.8rem; height: 0.8rem; bottom: 0; right: 0; font-size: 8px; justify-self: end;"></i>
+                            <i class="bi bi-chevron-down rounded-circle d-flex justify-content-center align-items-center position-absolute align-self-end bg-body-secondary text-light"
+                                style="width: 0.8rem; height: 0.8rem; bottom: 0; right: 0; font-size: 8px; justify-self: end;"></i>
                         </li>
                     </ul>
                 </nav>
@@ -264,9 +290,13 @@ if ($banner_picture_file) {
     <section class="container" id="profile">
         <!-- Banner -->
         <header class="d-flex w-100 justify-content-center position-relative">
-            <img class="h-auto object-fit-cover rounded-3" style="width: 85%; aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>" src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>" alt="Banner image">
+            <img class="h-auto object-fit-cover rounded-3"
+                style="width: 85%; aspect-ratio: 2.5/1; border-top-left-radius: 0 !important; border-top-right-radius: 0 !important; <?= $has_banner_image ? '' : 'filter: blur(5px) grayscale(75%);' ?>"
+                src="<?= $has_banner_image ? $banner_picture_file : 'https://picsum.photos/800/400' ?>"
+                alt="Banner image">
             <?php if (!$has_banner_image): ?>
-                <div class="position-absolute top-0 d-flex justify-content-start align-items-end w-100 h-100 rounded-3 d-none d-md-flex" style="left: 9%">
+                <div class="position-absolute top-0 d-flex justify-content-start align-items-end w-100 h-100 rounded-3 d-none d-md-flex"
+                    style="left: 9%">
                     <p class="bg-info-subtle text-info py-1 px-2 rounded-2 opacity-25">No banner provided</p>
                 </div>
             <?php endif; ?>
@@ -274,15 +304,18 @@ if ($banner_picture_file) {
 
         <!-- Profile Info -->
         <div class="d-flex flex-column align-items-center text-center mt-3">
-            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle" style="width: 168px; height: 168px; margin-top: -100px; border: 4px solid var(--bs-body); z-index: 1;">
-                <img src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>" alt="Profile picture" class="img w-100 rounded-circle h-100">
+            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle"
+                style="width: 168px; height: 168px; margin-top: -100px; border: 4px solid var(--bs-body); z-index: 1;">
+                <img src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
+                    alt="Profile picture" class="img w-100 rounded-circle h-100">
             </div>
             <h1 class="mt-3 mb-0 fw-bold"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?></h1>
             <p class="text-muted mb-0"><?= $course ? $course : '<em>Course not specified</em>'; ?></p>
 
             <?php if ($biography): ?>
                 <div class="container d-flex flex-wrap justify-content-center mt-2">
-                    <p class="text-muted py-2 px-3 bg-body-tertiary bg-opacity-75 rounded-3 mt-2 overflow-auto" style="max-height: 100px; max-width: 600px; scrollbar-width: thin;">
+                    <p class="text-muted py-2 px-3 bg-body-tertiary bg-opacity-75 rounded-3 mt-2 overflow-auto"
+                        style="max-height: 100px; max-width: 600px; scrollbar-width: thin;">
                         <?= $biography ? $biography : '<em>No biography provided</em>'; ?>
                     </p>
                 </div>
@@ -295,15 +328,15 @@ if ($banner_picture_file) {
         </div>
     </section>
 
-    <section class="w-100 d-flex justify-content-center" id="content">
-
+    <section class="w-100 d-flex justify-content-center mb-5" id="content">
         <div class="container row justify-content-center px-5">
             <div class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-4">
                 <h3 class="fs-5 fw-bold mb-3">Personal Details</h3>
 
                 <!-- Birthday -->
                 <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
+                        style="width: 2.5rem; height: 2.5rem;">
                         <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-cake"></i>
                     </div>
                     <div>
@@ -317,8 +350,10 @@ if ($banner_picture_file) {
 
                 <!-- Age -->
                 <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
-                        <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-hourglass-split"></i>
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
+                        style="width: 2.5rem; height: 2.5rem;">
+                        <i
+                            class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-hourglass-split"></i>
                     </div>
                     <div>
                         <small class="text-muted d-block">Age</small>
@@ -344,8 +379,10 @@ if ($banner_picture_file) {
                 ?>
                 <?php if (strtolower($gender) !== 'pnts'): ?>
                     <div class="d-flex align-items-center gap-3 mb-3">
-                        <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
-                            <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle <?= $gender_icon ?: 'bi bi-gender-ambiguous' ?>"></i>
+                        <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
+                            style="width: 2.5rem; height: 2.5rem;">
+                            <i
+                                class="fs-5 d-flex justify-content-center align-items-center rounded-circle <?= $gender_icon ?: 'bi bi-gender-ambiguous' ?>"></i>
                         </div>
                         <div>
                             <small class="text-muted d-block">Gender</small>
@@ -356,8 +393,10 @@ if ($banner_picture_file) {
 
                 <!-- Email -->
                 <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2" style="width: 2.5rem; height: 2.5rem;">
-                        <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-envelope"></i>
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2"
+                        style="width: 2.5rem; height: 2.5rem;">
+                        <i
+                            class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-envelope"></i>
                     </div>
                     <div>
                         <small class="text-muted d-block">Email</small>
@@ -367,14 +406,17 @@ if ($banner_picture_file) {
 
                 <h3 class="fs-5 fw-bold my-3">Hobbies</h3>
                 <!-- Hobbies -->
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2 flex-shrink-0" style="width: 2.5rem; height: 2.5rem;">
-                        <i class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-dice-3"></i>
+                <div class="d-flex align-items-start gap-3 mb-3">
+                    <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2 flex-shrink-0"
+                        style="width: 2.5rem; height: 2.5rem;">
+                        <i
+                            class="fs-5 d-flex justify-content-center align-items-center rounded-circle bi bi-dice-3"></i>
                     </div>
                     <div class="d-flex flex-row flex-wrap gap-2">
                         <?php for ($i = 0; $i < count($hobbies); $i++): ?>
-                            <span class="badge bg-secondary-subtle bg-opacity-25 text-primary-emphasis border border-secondary-subtle border-opacity-25">
-                                <!-- <i class="<?= $hobby_icon[$i] ?? 'bi bi-question-circle' ?>"></i> -->
+                            <span
+                                class="badge bg-secondary-subtle text-secondary border border-secondary border-opacity-25">
+                                <i class="<?= $hobby_icons[$hobbies[$i]] ?? 'bi bi-emoji-wink' ?>"></i>
                                 <?= ucwords($hobbies[$i]) ?>
                             </span>
                         <?php endfor; ?>
@@ -391,108 +433,6 @@ if ($banner_picture_file) {
             </div>
         </div>
     </section>
-
-
-
-
-    <div class="container mt-5 mb-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
-                    <div class="card-header bg-primary text-white text-center py-4">
-                        <h2 class="mb-0 fs-3 fw-bold"><i class="bi bi-person-badge me-2"></i>Profile Details</h2>
-                    </div>
-                    <div class="card-body p-4 p-md-5">
-
-                        <div class="text-center mb-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle"
-                                style="width: 100px; height: 100px;">
-                                <img src="<?= $profile_picture_file ?>" alt="Profile picture"
-                                    class="img w-100 rounded-circle h-100">
-                            </div>
-                            <h3 class="mt-3 mb-0 fw-bold"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?></h3>
-                            <p class="text-muted mb-0"><?= $course ? $course : '<em>Course not specified</em>'; ?></p>
-                        </div>
-
-                        <div class="row g-4 mt-2">
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="bg-primary-subtle text-primary rounded p-2">
-                                        <i class="bi bi-envelope-fill fs-5"></i>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted d-block mb-1">Email</small>
-                                        <span
-                                            class="fw-medium text-break"><?= $email ? $email : '<em>None</em>'; ?></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="bg-info-subtle text-info rounded p-2">
-                                        <i class="bi bi-calendar-event fs-5"></i>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted d-block mb-1">Birthday & Age</small>
-                                        <span
-                                            class="fw-medium text-break"><?= $birthday ? $birthday : '<em>None</em>'; ?>
-                                            (<?= $age ?? '?' ?> years old)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="bg-warning-subtle text-warning rounded p-2">
-                                        <i class="bi bi-gender-ambiguous fs-5"></i>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted d-block mb-1">Gender</small>
-                                        <span
-                                            class="fw-medium text-capitalize"><?= $gender ? $gender : '<em>None</em>'; ?></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="bg-danger-subtle text-danger rounded p-2">
-                                        <i class="bi bi-controller fs-5"></i>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted d-block mb-1">Hobbies</small>
-                                        <span
-                                            class="fw-medium text-capitalize"><?= !empty($hobbies) ? (is_array($hobbies) ? implode(', ', $hobbies) : $hobbies) : '<em>None</em>'; ?></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 pt-4 border-top">
-                            <div class="d-flex align-items-start gap-3">
-                                <div class="bg-success-subtle text-success rounded p-2">
-                                    <i class="bi bi-card-text fs-5"></i>
-                                </div>
-                                <div class="w-100">
-                                    <small class="text-muted d-block mb-2">Biography</small>
-                                    <div class="p-3 bg-body-tertiary rounded text-body">
-                                        <?= $biography ? nl2br($biography) : '<em class="text-muted">No biography provided.</em>'; ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="text-center mt-4">
-                    <a href="javascript:window.close();" class="btn btn-outline-secondary px-4 rounded-pill">Close
-                        Tab</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
