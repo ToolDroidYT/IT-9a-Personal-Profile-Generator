@@ -443,7 +443,6 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                         <?php endfor; ?>
                     </div>
                 </div>
-
             </div>
 
             <div class="col-lg-6 col-md-8">
@@ -527,7 +526,7 @@ $reactions = ['like', 'heart', 'care', 'wow'];
                         $display_time = getFuzzyTime($current_time);
 
                         // Calculate random dimensions and stuff
-                        $img_height = rand(400, 800);
+                        $img_height = rand(300, 450);
                         $likes = generate_random_number(0, 2000);
                         $shares = generate_random_number(0, min($likes, rand(1, 500)));
                         $comments = generate_random_number(0, $likes * 2);
