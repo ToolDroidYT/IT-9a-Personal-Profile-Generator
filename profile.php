@@ -163,23 +163,16 @@ $hobby_icons = [
     'drawing' => 'bi-palette',
     'working out' => 'bi-lightning-charge'
 ];
+
+function generate_random_number($min, $max)
+{
+    return rand($min, $max);
+}
+
+$friends_count = generate_random_number(100, 1000);
+$mutual_friends_count = generate_random_number(10, min($friends_count, 100));
+$posts_count = generate_random_number(30, 100);
 ?>
-
-<!-- 
-    TODO:
-      - $fullname (done)
-      - $birthday (done)
-      - $course (done)
-      - $email (done)
-      - $gender (done)
-      - $biography (done)
-
-      - $profile_picture (done)
-      - $banner_picture (done)
-
-      - $hobbies (done)
-      - $age (done)
--->
 
 <!DOCTYPE html>
 
@@ -235,8 +228,8 @@ $hobby_icons = [
 
             <!-- 2 -->
             <div class="d-flex align-items-center justify-content-center flex-fill d-none d-sm-block">
-                <nav class="">
-                    <ul class="navbar-nav flex-row gap-5 align-items-center justify-content-center ">
+                <nav>
+                    <ul class="navbar-nav flex-row gap-5 align-items-center justify-content-center">
                         <li class="nav-item d-flex justify-content-center align-items-center fs-5">
                             <i class="bi bi-house-door"></i>
                         </li>
@@ -304,13 +297,24 @@ $hobby_icons = [
 
         <!-- Profile Info -->
         <div class="d-flex flex-column align-items-center text-center mt-3">
+            <!-- PFP -->
             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-subtle rounded-circle"
                 style="width: 168px; height: 168px; margin-top: -100px; border: 4px solid var(--bs-body); z-index: 1;">
                 <img src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
                     alt="Profile picture" class="img w-100 rounded-circle h-100">
             </div>
+            <!-- Name -->
             <h1 class="mt-3 mb-0 fw-bold"><?= $fullname ? $fullname : '<em>Not Provided</em>'; ?></h1>
+            <!-- Course -->
             <p class="text-muted mb-0"><?= $course ? $course : '<em>Course not specified</em>'; ?></p>
+            <!-- Friends, Mutuals, and Posts -->
+            <p class="text-muted mb-0">
+                <?= $friends_count ?> friends
+                <?php if ($mutual_friends_count > 0): ?>
+                    &middot; <?= $mutual_friends_count ?> mutual friends
+                <?php endif; ?>
+                &middot; <?= $posts_count ?> posts
+            </p>
 
             <?php if ($biography): ?>
                 <div class="container d-flex flex-wrap justify-content-center mt-2">
@@ -405,6 +409,7 @@ $hobby_icons = [
                 </div>
 
                 <h3 class="fs-5 fw-bold my-3">Hobbies</h3>
+
                 <!-- Hobbies -->
                 <div class="d-flex align-items-start gap-3 mb-3">
                     <div class="nav-item ratio ratio-1x1 bg-secondary-subtle text-secondary rounded p-2 flex-shrink-0"
@@ -426,10 +431,37 @@ $hobby_icons = [
             </div>
 
             <div class="col-lg-6 col-md-8">
-                <h2 class="fs-4 fw-bold mb-3"><i class="bi bi-images me-2"></i>Images</h2>
-                <div class="row g-3">
-                    <!-- Image placeholders or actual images would go here -->
+                <!-- What's on your mind thingy -->
+                <div
+                    class="col-lg-6 col-md-8 card border-0 shadow-sm rounded-4 bg-body-tertiary p-3 d-flex flex-column w-100">
+                    <div class="d-flex flex-row">
+                        <img class="bg-body-tertiary fs-6 d-flex justify-content-center align-items-center rounded-circle"
+                            src="<?= $has_profile_image ? $profile_picture_file : 'https://picsum.photos/800/400' ?>"
+                            style="width: 3rem; height: 3rem;" alt="Profile picture">
+                        <input type="text" class="form-control rounded-pill bg-body-secondary border-0 ms-2"
+                            placeholder="What's on your mind?">
+                    </div>
+                    <hr style="opacity: 0.15;">
+                    <div class="d-flex flex-row">
+                        <button
+                            class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
+                            <i class="bi bi-camera-video fs-5 text-danger"></i>
+                            Live Video
+                        </button>
+                        <button
+                            class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
+                            <i class="bi bi-images fs-5 text-success"></i>
+                            Photo/Video
+                        </button>
+                        <button
+                            class="btn btn-sm rounded-3 flex-fill d-flex align-items-center justify-content-center gap-1">
+                            <i class="bi bi-flag fs-5 text-info"></i>
+                            Life update
+                        </button>
+                    </div>
                 </div>
+
+                <h3 class="fs-5 fw-bold my-3 ms-2">Posts</h3>
             </div>
         </div>
     </section>
