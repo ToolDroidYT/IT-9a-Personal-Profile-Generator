@@ -35,8 +35,8 @@
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                <div class="card shadow-lg border-0 rounded-3 overflow-hidden">
+                    <div class="card-header bg-primary text-white text-center py-4">
                         <h2 class="mb-0 fs-3 fw-bold"><i class="bi bi-person-lines-fill me-2"></i>Profile Generator</h2>
                     </div>
                     <div class="card-body p-4 p-md-5">
